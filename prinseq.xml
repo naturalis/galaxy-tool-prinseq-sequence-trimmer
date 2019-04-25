@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <tool id="prinseq_trimmer" name="Sequence trimmer" version="1.0">
-        <description>Trim and filter a set of sequences.</description>
+        <!--description>Trim and filter a set of sequences.</description-->
         <requirements>
               <requirement type="package">prinseq</requirement>
       	</requirements>
