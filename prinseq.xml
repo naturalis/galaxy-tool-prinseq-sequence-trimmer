@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
+<?xml version="2.0"?>
 <tool id="prinseq_trimmer" name="Sequence trimmer" version="1.0">
-        <!--description>Trim and filter a set of sequences.</description-->
+        <description>Trim and filter a set of sequences.</description>
         <requirements>
               <requirement type="package">prinseq</requirement>
       	</requirements>
@@ -9,6 +9,7 @@
 <![CDATA[
                 bash '$__tool_directory__/prinseq.sh'
 		$input_type.input_format
+    $output_log
 		#if $input_type.input_format == "hist"
 			$input_type.in_seq.in_seq_format
 			#if $input_type.in_seq.in_seq_format == "-fastq"
@@ -84,6 +85,7 @@
 		#if $dup.derep != 'none'
 			-derep $dup.derep
 		#end if
+
 ]]>
 	</command>
 
@@ -183,8 +185,14 @@
 		<data format="zip" name="output_zip" label="$input_type.input_file.display_name Filtered">
 			<filter>input_type['input_format'] == "zip"</filter>
 		</data>
-
-
+    <data format="txt" name="output_log" label="sequence trimmer log" />
+    <!-- $input.display_name
+    <data format="txt" name="output_log" label="$input_type.in_seq.input_file.display_name log" >
+      <filter>input_type['input_format'] != "zip"</filter>
+    </data>
+    <data format="txt" name="output_log" label="$input_type.input_file.display_name log" >
+      <filter>input_type['input_format'] == "zip"</filter>
+    </data>-->
 	</outputs>
 
 	<tests>
