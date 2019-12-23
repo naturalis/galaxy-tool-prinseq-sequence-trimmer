@@ -47,7 +47,7 @@ then
 			# unzip the reads to the temp file, remove the temp file without the extension afterwards
 			#cat "$file" | prinseq-lite.pl "$2" stdin -out_format "$3" -out_good "$temp" "${@:6}" > /dev/null 2>&1
 			echo $sample":" >> $2
-			cat "$file" | prinseq-lite.pl "$3" stdin -out_format "$4" -out_good "$temp" "${@:7}" >> $2 2>> $2
+			cat "$file" | prinseq-lite.pl "$3" stdin -out_format "$4" -line_width 0 -out_good "$temp" "${@:7}" >> $2 2>> $2
 			rm "$temp"
 
 			# Check if the output file contains reads; if so rename the file (mv) and add it to the temp zip
@@ -71,7 +71,7 @@ then
 else
 	echo $sample":" >> $2
 	# run the prinseq lite tool with the user input
-	prinseq-lite.pl "$3" "$5" -out_format "$4" -out_good "$6" "${@:7}" > $2 2> $2
+	prinseq-lite.pl "$3" "$5" -out_format "$4" -line_width 0 -out_good "$6" "${@:7}" > $2 2> $2
 	# if there is an output file (i.e. not all reads have been filtered out)
 	# move the output file to the galaxy path
 	if [ -f "${6}".* ]; then
