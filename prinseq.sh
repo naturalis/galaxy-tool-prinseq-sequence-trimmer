@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# sanity check
+printf "Conda env: $CONDA_DEFAULT_ENV\n"
+printf "Perl: $(perl -v | head -n2 | tail -n1 | awk -F '(' '{print $2}' | awk -F ')' '{print $1}')\n"
+printf "Prinseq-lite version: $(prinseq-lite.pl --version | awk '{print $2}')\n"
+printf "Bash version: ${BASH_VERSION}\n\n"
+
 # if the input data is located in a zip file:
 if [ "$1" == "zip" ]
 then
@@ -17,11 +23,8 @@ then
 	fi
 
 	# set temp zip output file
-	#temp_zip=$(mktemp -u /media/GalaxyData/database/files/XXXXXX.zip)
-	#temp_zip=$(mktemp -u /home/galaxy/galaxy/database/XXXXXX.zip)
-  #outlocation=$(mktemp -d /home/galaxy/galaxy/database/files/XXXXXX)
-	temp_zip=$(mktemp -u /media/GalaxyData/database/files/XXXXXX.zip)
-  outlocation=$(mktemp -d /media/GalaxyData/database/files/XXXXXX)
+	temp_zip=$(mktemp -u /data/files/XXXXXX.zip)
+	outlocation=$(mktemp -d /data/files/XXXXXX)
 	# go through the files in the zip
 	IFS=$'\n'
 	for file in $(zipinfo -1 "$5")
@@ -41,8 +44,7 @@ then
 		if [ $(head -n 1 $file | grep -o "^.") == "$header" ]
 		then
 			# set temp file for the reads
-			temp=$(mktemp /media/GalaxyData/database/files/XXXXXX)
-			#temp=$(mktemp /home/galaxy/galaxy/database/XXXXXX)
+			temp=$(mktemp /data/files/XXXXXX)
 
 			# unzip the reads to the temp file, remove the temp file without the extension afterwards
 			#cat "$file" | prinseq-lite.pl "$2" stdin -out_format "$3" -out_good "$temp" "${@:6}" > /dev/null 2>&1
