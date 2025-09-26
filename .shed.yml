@@ -7,8 +7,8 @@ remote_repository_url: https://github.com/naturalis/galaxy-tool-prinseq-sequence
 homepage_url: https://github.com/naturalis/galaxy-tool-prinseq-sequence-trimmer.git
 type: unrestricted
 categories:
-   - "Fastq Manipulation - Tools for manipulating fastq data"
-   - "Fasta Manipulation - Tools for manipulating fasta data"
+   - "Fastq Manipulation"
+   - "Fasta Manipulation"
 auto_tool_repositories:
   name_template: naturalis_prinseq_sequence_trimmer
   description_template: naturalis_prinseq_sequence_trimmer
